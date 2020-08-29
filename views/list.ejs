@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/styles.css" />
-    <title>To Do list</title>
-  </head>
-  <body>
+<%- include("header") %> 
     <div class="box" id="heading">
-      <h1><%= kindOfDay %></h1>
+      <h1><%= pageTitle %></h1>
     </div>
 
     <div class="box">
@@ -31,8 +19,8 @@
           placeholder="New item"
           autocomplete="off"
         />
-        <button type="submit">+</button>
+        <button type="submit" name="boton" value="<%= pageTitle %>">+</button>
       </form>
     </div>
   </body>
-</html>
+  <%- include("footer") %> 

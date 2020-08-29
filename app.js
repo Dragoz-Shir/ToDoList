@@ -2,9 +2,10 @@ const express = require("express");
 const bodyP = require("body-parser");
 
 const app = express();
-var items = [];
+var items = ["Comprar comida", "Prepara la comida", "Comer :3"];
 app.set("view engine", "ejs");
 app.use(bodyP.urlencoded({ extended: false }));
+app.use(express.static("public"));
 
 app.listen(3000, function () {
   console.log("I'm alive at port 3000");

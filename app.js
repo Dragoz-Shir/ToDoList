@@ -27,44 +27,39 @@ const item1 = new Item({
 });
 const item2 = new Item({
   name: "<- click para borrar un item",
-}); /*
-Item.insertMany([item, item1, item2], function (e) {
-  if (e) {
-    console.log("Error al insertar");
-  } else {
-    console.log("Todo excelentet al insertar");
-  }
-});*/
+});
+
 app.listen(3000, function () {
   console.log("I'm alive at port 3000");
 });
 
 app.get("/", function (req, res) {
-  let array = [];
   Item.find(function (e, foundItems) {
-    foundItems.forEach(function (item) {
-      array.push(item.name);
-    });
-
-    res.render("list", { pageTitle: "Today", addItem: array });
+    if (foundItems.length === 0) {
+      Item.insertMany([item, item1, item2], function (e) {
+        if (e) {
+          console.log("Error al insertar");
+        } else {
+          console.log("Todo excelentet al insertar");
+        }
+      });
+      res.redirect("/");
+    } else {
+      res.render("list", { pageTitle: "Today", addItem: foundItems });
+    }
   });
 });
 
 app.post("/", function (req, res) {
   //console.log(req.body.entrada);
-  let item = req.body.entrada;
-  let title = req.body.boton;
+  const itemName = req.body.entrada;
+  // let title = req.body.boton;
+  const item = new Item({
+    name: itemName,
+  });
+  item.save();
 
-  if (title === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-
-    res.redirect("/");
-  }
-
-  //res.send("PAso");
+  res.redirect("/");
 });
 
 app.get("/work", function (req, res) {

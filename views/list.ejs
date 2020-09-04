@@ -1,26 +1,29 @@
-<%- include("header") %> 
-    <div class="box" id="heading">
-      <h1><%= pageTitle %></h1>
-    </div>
+<%- include("header") %>
+<div class="box" id="heading">
+  <h1><%= pageTitle %></h1>
+</div>
 
-    <div class="box">
-      <% for (var i in addItem) { %>
-      <div class="item">
-        <input type="checkbox" />
-        <p><%= addItem[i] %></p>
-      </div>
-      <% } %>
+<div class="box">
 
-      <form class="item" action="/" method="POST">
-        <input
-          type="text"
-          name="entrada"
-          id="entrada"
-          placeholder="New item"
-          autocomplete="off"
-        />
-        <button type="submit" name="boton" value="<%= pageTitle %>">+</button>
-      </form>
-    </div>
-  </body>
-  <%- include("footer") %> 
+
+  <% addItem.forEach(function(item){%>
+
+  <div class="item">
+    <input type="checkbox" />
+    <p><%= item.name %></p>
+  </div>
+
+
+  <% }) %>
+
+
+
+
+
+  <form class="item" action="/" method="POST">
+    <input type="text" name="entrada" id="entrada" placeholder="New item" autocomplete="off" />
+    <button type="submit" name="boton" value="<%= pageTitle %>">+</button>
+  </form>
+</div>
+</body>
+<%- include("footer") %>

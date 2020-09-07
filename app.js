@@ -8,10 +8,14 @@ app.set("view engine", "ejs");
 app.use(bodyP.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todoListDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://admin-dragoz:test123@cluster0.7ab5j.mongodb.net/todoListDB",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
 const itemSchema = {
   name: {
     type: String,
@@ -83,7 +87,7 @@ app.post("/delete", function (req, res) {
   } else {
     List.findOneAndUpdate(
       { name: listName }, // lista a buscar
-      { $pull: { items: itemCheckId } }, //eliminando con el metodo pull, que solo aplica a los arrays
+      { $pull: { items: { _id: itemCheckId } } }, //eliminando con el metodo pull, que solo aplica a los arrays
       function (e, foundItem) {
         if (!e) {
           res.redirect("/" + listName);

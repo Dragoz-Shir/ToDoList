@@ -34,8 +34,14 @@ const item2 = new Item({
   name: "<- click para borrar un item",
 });
 const defaultItems = [item, item1, item2];
-app.listen(3000, function () {
-  console.log("I'm alive at port 3000");
+
+const port = process.env.PORT;
+
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port, function () {
+  console.log("I'm alive succesfully");
 });
 
 app.get("/", function (req, res) {
